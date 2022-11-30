@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-export default function Form({ onSubmit, legend, children, css }) {
+export default function Form({ onSubmit, legend, children }) {
   return (
     <form onSubmit={onSubmit} css={form}>
       <fieldset>

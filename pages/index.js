@@ -6,16 +6,16 @@ import Experience from "components/Experience";
 import Contact from "components/Contact";
 import LeftFloating from "components/LeftFloating";
 
-export default function Home({ observerRef }) {
+export default function Home() {
   return (
     <>
       <Seo title="Park SangHun | Portfolio" />
       <HiddenTitle title="Park SangHun Portfolio" tag="h1" />
-      <Visual observerRef={observerRef} />
-      <About observerRef={observerRef} />
-      <Experience observerRef={observerRef} />
-      <Contact observerRef={observerRef} />
-      <LeftFloating observerRef={observerRef} />
+      <Visual />
+      <About />
+      <Experience />
+      <Contact />
+      <LeftFloating />
     </>
   );
 }

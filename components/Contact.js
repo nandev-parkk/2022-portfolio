@@ -10,6 +10,7 @@ import { checkName, checkEmail, checkText } from "utils/validator";
 import Link from "next/link";
 import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
 import { IsObserverContext } from "contexts/store";
+import HttpContext from "modules/Http";
 
 export default function Contact() {
   const labelRef = useRef([]);
@@ -18,10 +19,10 @@ export default function Contact() {
     validateReducer,
     VALIDATE_INITIAL_STATE
   );
-
   const { name, email, title, content } = value;
   const { isName, isEmail, isTitle, isContent } = validate;
   const { observerRef } = useContext(IsObserverContext);
+  const http = useContext(HttpContext);
 
   useEffect(() => {
     labelRef.current.forEach((el) => {
@@ -34,6 +35,10 @@ export default function Contact() {
         .join("");
     });
   }, []);
+
+  const submitContact = async () => {
+    await http.postContact(value);
+  };
 
   return (
     <section
@@ -70,10 +75,11 @@ export default function Contact() {
             </Link>
           </nav>
         </div>
-        <Form legend="문의 하기">
+        <Form legend="문의 하기" onSubmit={submitContact}>
           <div css={[inputGroup, nameInputGroup({ name, isName })]}>
             <TextField
               type="text"
+              id="name"
               name="name"
               value={value.name}
               onChange={(e) => {
@@ -87,12 +93,10 @@ export default function Contact() {
                 });
               }}
               required
-              autoFocus
             />
             <label
               htmlFor="name"
               css={[label, nameLabel({ name, isName })]}
-              validate={true}
               ref={(el) => (labelRef.current[0] = el)}
             >
               name
@@ -101,6 +105,7 @@ export default function Contact() {
           <div css={[inputGroup, emailInputGroup({ email, isEmail })]}>
             <TextField
               type="email"
+              id="email"
               name="email"
               value={value.email}
               onChange={(e) => {
@@ -126,6 +131,7 @@ export default function Contact() {
           <div css={[inputGroup, titleInputGroup({ title, isTitle })]}>
             <TextField
               type="text"
+              id="title"
               name="title"
               value={value.title}
               onChange={(e) => {
@@ -150,6 +156,7 @@ export default function Contact() {
           </div>
           <div css={[inputGroup, contentInputGroup({ content, isContent })]}>
             <TextArea
+              id="content"
               name="content"
               value={value.content}
               onChange={(e) => {
@@ -172,7 +179,21 @@ export default function Contact() {
               content
             </label>
           </div>
-          <button css={submit}>문의하기</button>
+          <button
+            css={submit}
+            disabled={
+              name === "" ||
+              email === "" ||
+              title === "" ||
+              content === "" ||
+              !isName ||
+              !isEmail ||
+              !isTitle ||
+              !isContent
+            }
+          >
+            문의하기
+          </button>
         </Form>
       </div>
     </section>
@@ -340,7 +361,7 @@ const inputGroup = css`
 const nameInputGroup = ({ name, isName }) => css`
   & input {
     border-color: ${isName
-      ? color.yellow
+      ? color.white
       : name !== "" && !isName
       ? color.red
       : null};
@@ -355,7 +376,7 @@ const nameInputGroup = ({ name, isName }) => css`
 const emailInputGroup = ({ email, isEmail }) => css`
   & input {
     border-color: ${isEmail
-      ? color.yellow
+      ? color.white
       : email !== "" && !isEmail
       ? color.red
       : null};
@@ -370,7 +391,7 @@ const emailInputGroup = ({ email, isEmail }) => css`
 const titleInputGroup = ({ title, isTitle }) => css`
   & input {
     border-color: ${isTitle
-      ? color.yellow
+      ? color.white
       : title !== "" && !isTitle
       ? color.red
       : null};
@@ -385,7 +406,7 @@ const titleInputGroup = ({ title, isTitle }) => css`
 const contentInputGroup = ({ content, isContent }) => css`
   & textarea {
     border-color: ${isContent
-      ? color.yellow
+      ? color.white
       : content !== "" && !isContent
       ? color.red
       : null};
@@ -416,7 +437,7 @@ const label = css`
 
 const nameLabel = ({ name, isName }) => css`
   & span {
-    color: ${isName ? color.yellow : name !== "" && !isName ? color.red : null};
+    color: ${isName ? color.white : name !== "" && !isName ? color.red : null};
     transform: ${isName
       ? "translateY(-20px)"
       : name !== "" && !isName
@@ -428,7 +449,7 @@ const nameLabel = ({ name, isName }) => css`
 const emailLabel = ({ email, isEmail }) => css`
   & span {
     color: ${isEmail
-      ? color.yellow
+      ? color.white
       : email !== "" && !isEmail
       ? color.red
       : null};
@@ -443,7 +464,7 @@ const emailLabel = ({ email, isEmail }) => css`
 const titleLabel = ({ title, isTitle }) => css`
   & span {
     color: ${isTitle
-      ? color.yellow
+      ? color.white
       : title !== "" && !isTitle
       ? color.red
       : null};
@@ -458,7 +479,7 @@ const titleLabel = ({ title, isTitle }) => css`
 const contentLabel = ({ content, isContent }) => css`
   & span {
     color: ${isContent
-      ? color.yellow
+      ? color.white
       : content !== "" && !isContent
       ? color.red
       : null};
@@ -477,6 +498,12 @@ const submit = css`
   padding: 14px 20px;
   width: 100%;
   font-size: ${font.size.md};
+  transition: ${transition.short};
+
+  &:disabled {
+    color: ${color.gray};
+    border-color: ${color.gray};
+  }
 
   @media screen and (max-width: 425px) {
     font-size: ${font.size.sm};

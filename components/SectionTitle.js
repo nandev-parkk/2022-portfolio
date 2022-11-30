@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
 import commonStyles from "styles/common";
 
-export default function SectionTitle(props) {
+export default function SectionTitle({ title, align }) {
   return (
-    <hgroup css={titleGroup(props)}>
-      <h3 css={title(props)} className="montserrat">
-        {props.title}
+    <hgroup css={hgroup({ title, align })}>
+      <h3 css={heading({ align })} className="montserrat">
+        {title}
       </h3>
     </hgroup>
   );
@@ -13,11 +13,11 @@ export default function SectionTitle(props) {
 
 const { color, font } = commonStyles;
 
-const titleGroup = (props) => css`
-  text-align: ${props.align === "right" && "right"};
+const hgroup = ({ align }) => css`
+  text-align: ${align === "right" && "right"};
 `;
 
-const title = (props) => css`
+const heading = ({ align }) => css`
   color: ${color.white};
   font-size: 32px;
   font-weight: ${font.weight.regular};
@@ -33,8 +33,8 @@ const title = (props) => css`
     width: 150px;
     height: 2px;
     background-color: ${color.white};
-    right: ${props.align === "right" ? "auto" : "-170px"};
-    left: ${props.align === "right" ? "-170px" : "auto"};
+    right: ${align === "right" ? "auto" : "-170px"};
+    left: ${align === "right" ? "-170px" : "auto"};
   }
 
   @media screen and (max-width: 425px) {
@@ -50,8 +50,8 @@ const title = (props) => css`
 
     &::before {
       width: 80px;
-      right: ${props.align === "right" ? "auto" : "-100px"};
-      left: ${props.align === "right" ? "-100px" : "auto"};
+      right: ${align === "right" ? "auto" : "-100px"};
+      left: ${align === "right" ? "-100px" : "auto"};
     }
   }
 `;

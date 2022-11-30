@@ -57,6 +57,10 @@ const global = () => css`
     color: inherit;
   }
 
+  button[disabled] {
+    cursor: no-drop;
+  }
+
   fieldset {
     border: none;
   }
