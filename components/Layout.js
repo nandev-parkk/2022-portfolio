@@ -11,6 +11,8 @@ export default function Layout({ children }) {
     setIsOpen(!isOpen);
   };
 
+  const [innerWidth, setInnerWidth] = useState(0);
+
   useEffect(() => {
     const body = window.document.body;
     isOpen ? body.classList.add("blur") : body.classList.remove("blur");

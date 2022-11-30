@@ -20,7 +20,7 @@ const textarea = css`
   border-radius: 4px;
   display: block;
   width: 100%;
-  height: 100px;
+  height: 200px;
   transition: ${transition.short};
   caret-color: ${color.white};
   color: ${color.white};

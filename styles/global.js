@@ -69,6 +69,7 @@ const global = () => css`
     background-color: transparent;
     border: none;
     outline: none;
+    font-family: "Rajdhani", sans-serif;
   }
 
   textarea {
@@ -76,6 +77,7 @@ const global = () => css`
     outline: none;
     border: none;
     background-color: transparent;
+    font-family: "Rajdhani", sans-serif;
   }
 
   ::selection {

@@ -3,6 +3,7 @@ const commonStyles = {
     black: "#222",
     white: "#f7f7f7",
     yellow: "#f7b731",
+    red: "#f05650",
     gray: "#999",
   },
   transition: {

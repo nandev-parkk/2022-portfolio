@@ -5,10 +5,12 @@ import Hamburger from "./Hamburger/Hamburger";
 import Link from "next/link";
 import Image from "next/image";
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { IsOpenContext } from "contexts/store";
 
 export default function Header() {
   const [direction, setDirection] = useState("up");
+  const { isOpen, handleClick } = useContext(IsOpenContext);
 
   useEffect(() => {
     window.addEventListener("mousewheel", (e) => {
@@ -17,7 +19,7 @@ export default function Header() {
   });
 
   return (
-    <header css={header({ direction })}>
+    <header css={header({ direction, isOpen })}>
       <Link href="/">
         <Image src={logo} alt="logo" width={70} />
       </Link>
@@ -36,13 +38,14 @@ export default function Header() {
       </nav>
       <Hamburger />
       <Aside />
+      <div css={bg({ isOpen })} onClick={handleClick} />
     </header>
   );
 }
 
 const { color, transition } = commonStyles;
 
-const header = ({ direction }) => css`
+const header = ({ direction, isOpen }) => css`
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -55,7 +58,9 @@ const header = ({ direction }) => css`
   z-index: 1;
   background-color: ${color.black};
   transition: ${transition.short};
-  transform: ${direction === "down" ? "translateY(-80px)" : "translateY(0)"};
+  transform: ${!isOpen && direction === "down"
+    ? "translateY(-80px)"
+    : "translateY(0)"};
 
   @media screen and (max-width: 1023px) {
     padding: 0 20px;
@@ -71,4 +76,16 @@ const nav = css`
   @media screen and (max-width: 1023px) {
     display: none;
   }
+`;
+
+const bg = ({ isOpen }) => css`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  display: ${isOpen ? "block" : "none"};
 `;

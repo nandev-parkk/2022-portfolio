@@ -1,16 +1,21 @@
 import commonStyles from "styles/common";
+import { IsOpenContext } from "contexts/store";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
-import { IsOpenContext } from "contexts/store";
 import { useContext } from "react";
 
 export default function Aside() {
-  const { isOpen } = useContext(IsOpenContext);
+  const { isOpen, handleClick } = useContext(IsOpenContext);
 
   return (
     <aside css={aside({ isOpen })}>
-      <ul css={list}>
+      <ul
+        css={list}
+        onClick={(e) => {
+          handleClick();
+        }}
+      >
         <li>
           <Link className="link" href="/">
             Home
@@ -32,7 +37,12 @@ export default function Aside() {
           </Link>
         </li>
       </ul>
-      <nav css={nav}>
+      <nav
+        css={nav}
+        onClick={(e) => {
+          handleClick();
+        }}
+      >
         <div css={sns}>
           <Link
             href={process.env.NEXT_PUBLIC_GITHUB}
@@ -81,23 +91,28 @@ const aside = ({ isOpen }) => css`
   width: min(400px, 70%);
   background-color: ${color.white};
   transition: ${transition.short};
-  transform: ${!isOpen && "translateX(200%)"};
+  transform: ${!isOpen ? "translateX(200%)" : "translateX(0)"};
   color: ${color.black};
   padding: 100px 40px;
 
   @media screen and (max-width: 425px) {
     padding: 100px 26px;
   }
+
+  @media screen and (max-width: 1023px) {
+  }
 `;
 
 const list = css`
+  display: inline-block;
+
   li {
     &:not(:last-child) {
       margin-bottom: 40px;
     }
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 425px) {
     li {
       font-size: ${font.size.sm};
 
@@ -156,7 +171,7 @@ const contact = css`
     margin-right: 20px;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 425px) {
     a {
       font-size: ${font.size.sm};
     }

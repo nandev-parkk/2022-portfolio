@@ -85,7 +85,7 @@ const descGroup = css``;
 const desc = css`
   margin-bottom: 40px;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 425px) {
     font-size: ${font.size.sm};
   }
 `;
@@ -93,12 +93,12 @@ const desc = css`
 const skills = css``;
 
 const skillsTitle = css`
-  font-size: 24px;
+  font-size: ${font.size.xl};
   display: inline-block;
   margin-bottom: 20px;
 
-  @media screen and (max-width: 767px) {
-    font-size: ${font.size.md};
+  @media screen and (max-width: 425px) {
+    font-size: ${font.size.lg};
   }
 `;
 
@@ -132,7 +132,7 @@ const skillsList = css`
     }
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 425px) {
     li {
       font-size: ${font.size.sm};
     }

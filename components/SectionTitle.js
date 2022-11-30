@@ -38,16 +38,14 @@ const title = (props) => css`
   }
 
   @media screen and (max-width: 425px) {
-    font-size: ${font.size.lg};
-    margin-bottom: 20px;
-
-    &::before {
-      display: none;
-    }
+    font-size: ${font.size.xxl};
   }
 
-  @media screen and (min-width: 426px) and (max-width: 767px) {
-    font-size: ${font.size.lg};
+  @media screen and (min-width: 426px) and (max-width: 1023px) {
+    font-size: 26px;
+  }
+
+  @media screen and (max-width: 1023px) {
     margin-bottom: 20px;
 
     &::before {
