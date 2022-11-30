@@ -1,10 +1,14 @@
 import { css } from "@emotion/react";
 import HiddenTitle from "./HiddenTitle";
 import commonStyles from "styles/common";
+import { useContext } from "react";
+import { IsObserverContext } from "contexts/store";
 
 export default function Visual() {
+  const { observerRef } = useContext(IsObserverContext);
+
   return (
-    <section css={visual}>
+    <section id="home" ref={(el) => (observerRef.current[0] = el)} css={visual}>
       <HiddenTitle title="visual" />
       <p className="montserrat">
         Park SangHun

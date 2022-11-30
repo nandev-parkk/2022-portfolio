@@ -53,6 +53,8 @@ const global = () => css`
     background-color: transparent;
     font-family: "Rajdhani", sans-serif;
     cursor: pointer;
+    position: relative;
+    color: inherit;
   }
 
   fieldset {

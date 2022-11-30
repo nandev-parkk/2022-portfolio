@@ -3,15 +3,10 @@ import Footer from "./Footer";
 import commonStyles from "styles/common";
 import { css } from "@emotion/react";
 import { IsOpenContext } from "contexts/store";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function Layout({ children }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const [innerWidth, setInnerWidth] = useState(0);
+  const { isOpen } = useContext(IsOpenContext);
 
   useEffect(() => {
     const body = window.document.body;
@@ -19,13 +14,13 @@ export default function Layout({ children }) {
   }, [isOpen]);
 
   return (
-    <IsOpenContext.Provider value={{ isOpen, handleClick }}>
+    <>
       <Header />
       <main css={container({ isOpen })}>
         <div css={inner}>{children}</div>
         <Footer />
       </main>
-    </IsOpenContext.Provider>
+    </>
   );
 }
 

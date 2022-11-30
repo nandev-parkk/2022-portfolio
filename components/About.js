@@ -1,13 +1,17 @@
-import { css } from "@emotion/react";
 import HiddenTitle from "./HiddenTitle";
 import SectionTitle from "./SectionTitle";
 import commonStyles from "styles/common";
 import profile from "public/images/1.jpeg";
 import Image from "next/image";
+import { css } from "@emotion/react";
+import { IsObserverContext } from "contexts/store";
+import { useContext } from "react";
 
 export default function About() {
+  const { observerRef } = useContext(IsObserverContext);
+
   return (
-    <section css={about}>
+    <section id="about" ref={(el) => (observerRef.current[1] = el)} css={about}>
       <HiddenTitle title="about" />
       <SectionTitle title="About" />
 
@@ -59,7 +63,7 @@ export default function About() {
 const { color, font } = commonStyles;
 
 const about = css`
-  padding: 0 0 140px;
+  margin: 0 0 140px;
 `;
 
 const content = css`
@@ -72,14 +76,17 @@ const img = css`
   min-width: 50%;
   min-height: 50%;
   max-width: 400px;
-  max-height: 400px;
   display: block;
-  margin: 0 auto 40px;
+
+  @media screen and (max-width: 767px) {
+    margin: 0 auto 40px;
+  }
 
   @media screen and (min-width: 768px) {
     margin-right: 40px;
   }
 `;
+
 const descGroup = css``;
 
 const desc = css`

@@ -10,7 +10,7 @@ import { IsOpenContext } from "contexts/store";
 
 export default function Header() {
   const [direction, setDirection] = useState("up");
-  const { isOpen, handleClick } = useContext(IsOpenContext);
+  const { isOpen, setIsOpen } = useContext(IsOpenContext);
 
   useEffect(() => {
     window.addEventListener("mousewheel", (e) => {
@@ -38,7 +38,12 @@ export default function Header() {
       </nav>
       <Hamburger />
       <Aside />
-      <div css={bg({ isOpen })} onClick={handleClick} />
+      <div
+        css={bg({ isOpen })}
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+      />
     </header>
   );
 }

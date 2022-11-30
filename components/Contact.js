@@ -5,10 +5,11 @@ import Form from "./Form";
 import TextField from "./TextField";
 import { css } from "@emotion/react";
 import TextArea from "./TextArea";
-import { useEffect, useRef, useReducer } from "react";
+import { useEffect, useRef, useReducer, useContext } from "react";
 import { checkName, checkEmail, checkText } from "utils/validator";
 import Link from "next/link";
 import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
+import { IsObserverContext } from "contexts/store";
 
 export default function Contact() {
   const labelRef = useRef([]);
@@ -20,6 +21,7 @@ export default function Contact() {
 
   const { name, email, title, content } = value;
   const { isName, isEmail, isTitle, isContent } = validate;
+  const { observerRef } = useContext(IsObserverContext);
 
   useEffect(() => {
     labelRef.current.forEach((el) => {
@@ -34,7 +36,11 @@ export default function Contact() {
   }, []);
 
   return (
-    <section css={contact} id="contact">
+    <section
+      id="contact"
+      ref={(el) => (observerRef.current[3] = el)}
+      css={contact}
+    >
       <HiddenTitle title="contact" />
       <SectionTitle title="Contact" />
       <div css={contents}>
@@ -220,7 +226,7 @@ const validateReducer = (state, action) => {
 const { color, font, transition } = commonStyles;
 
 const contact = css`
-  padding: 140px 0;
+  margin: 140px 0;
 `;
 
 const contents = css`

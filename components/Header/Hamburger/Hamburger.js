@@ -4,10 +4,16 @@ import commonStyles from "styles/common";
 import { css } from "@emotion/react";
 
 export default function Hamburger() {
-  const { isOpen, handleClick } = useContext(IsOpenContext);
+  const { isOpen, setIsOpen } = useContext(IsOpenContext);
 
   return (
-    <button type="button" onClick={handleClick} css={hamburger({ isOpen })}>
+    <button
+      type="button"
+      onClick={() => {
+        setIsOpen(!isOpen);
+      }}
+      css={hamburger({ isOpen })}
+    >
       <span></span>
       <span></span>
       <span></span>

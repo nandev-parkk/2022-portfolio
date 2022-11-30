@@ -1,37 +1,52 @@
 import commonStyles from "styles/common";
+import { getIntersectionObserver } from "utils/observer";
 import { css } from "@emotion/react";
-import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
+import { scrollIntoView } from "utils/scrollIntoView";
+import { IsObserverContext } from "contexts/store";
 
 export default function LeftFloating() {
+  const { observerRef } = useContext(IsObserverContext);
+  const [currentId, setCurrentId] = useState(null);
+
+  useEffect(() => {
+    const observer = getIntersectionObserver(setCurrentId);
+
+    observerRef.current.forEach((el) => {
+      observer.observe(el);
+    });
+  });
+
   return (
     <aside css={floating}>
       <ul css={list}>
-        <li>
-          <Link className="link" href="#home">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link className="link" href="#about">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link className="link" href="#experience">
-            Experience
-          </Link>
-        </li>
-        <li>
-          <Link className="link" href="#contact">
-            Contact
-          </Link>
-        </li>
+        {listItems.map((item, i) => (
+          <li key={item.id}>
+            <button
+              type="button"
+              css={btn({ currentId, i })}
+              className="link"
+              onClick={() => {
+                scrollIntoView(observerRef, i);
+              }}
+            >
+              {item.title}
+            </button>
+          </li>
+        ))}
       </ul>
     </aside>
   );
 }
 
-const { color, transition } = commonStyles;
+const listItems = [
+  { id: "0", title: "Home" },
+  { id: "1", title: "About" },
+  { id: "2", title: "Experience" },
+  { id: "3", title: "Contact" },
+];
+
+const { color, font, transition } = commonStyles;
 
 const floating = css`
   position: fixed;
@@ -51,5 +66,20 @@ const list = css`
     &:not(:last-child) {
       margin-bottom: 40px;
     }
+  }
+`;
+
+const btn = ({ currentId, i }) => css`
+  font-size: ${font.size.md};
+
+  &::after {
+    content: "";
+    width: ${currentId === i && "100%"};
+    height: 2px;
+    background: ${color.yellow};
+    position: absolute;
+    bottom: -2px;
+    left: ${currentId === i && "0"};
+    transition: ${transition.short};
   }
 `;

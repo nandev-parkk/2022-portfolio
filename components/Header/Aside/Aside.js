@@ -1,46 +1,52 @@
 import commonStyles from "styles/common";
-import { IsOpenContext } from "contexts/store";
+import { IsOpenContext, IsObserverContext } from "contexts/store";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { scrollIntoView } from "utils/scrollIntoView";
+import { getIntersectionObserver } from "utils/observer";
 
 export default function Aside() {
-  const { isOpen, handleClick } = useContext(IsOpenContext);
+  const { isOpen, setIsOpen } = useContext(IsOpenContext);
+  const { observerRef } = useContext(IsObserverContext);
+  const [currentId, setCurrentId] = useState(null);
+
+  useEffect(() => {
+    const observer = getIntersectionObserver(setCurrentId);
+
+    observerRef.current.forEach((el) => {
+      observer.observe(el);
+    });
+  });
 
   return (
     <aside css={aside({ isOpen })}>
       <ul
         css={list}
-        onClick={(e) => {
-          handleClick();
+        onClick={() => {
+          setIsOpen(!isOpen);
         }}
       >
-        <li>
-          <Link className="link" href="/">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link className="link" href="/">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link className="link" href="/">
-            Experience
-          </Link>
-        </li>
-        <li>
-          <Link className="link" href="/">
-            Contact
-          </Link>
-        </li>
+        {listItems.map((item, i) => (
+          <li key={item.id}>
+            <button
+              type="button"
+              css={btn({ currentId, i })}
+              className="link"
+              onClick={() => {
+                scrollIntoView(observerRef, i);
+              }}
+            >
+              {item.title}
+            </button>
+          </li>
+        ))}
       </ul>
       <nav
         css={nav}
-        onClick={(e) => {
-          handleClick();
+        onClick={() => {
+          setIsOpen(!isOpen);
         }}
       >
         <div css={sns}>
@@ -79,6 +85,13 @@ export default function Aside() {
     </aside>
   );
 }
+
+const listItems = [
+  { id: "0", title: "Home" },
+  { id: "1", title: "About" },
+  { id: "2", title: "Experience" },
+  { id: "3", title: "Contact" },
+];
 
 const { color, font, transition } = commonStyles;
 
@@ -120,6 +133,21 @@ const list = css`
         margin-bottom: 24px;
       }
     }
+  }
+`;
+
+const btn = ({ currentId, i }) => css`
+  font-size: ${font.size.md};
+
+  &::after {
+    content: "";
+    width: ${currentId === i && "100%"};
+    height: 2px;
+    background: ${color.yellow};
+    position: absolute;
+    bottom: -2px;
+    left: ${currentId === i && "0"};
+    transition: ${transition.short};
   }
 `;
 
