@@ -11,8 +11,10 @@ import Link from "next/link";
 import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
 import { IsObserverContext } from "contexts/store";
 import HttpContext from "modules/Http";
+import { useRouter } from "next/router";
 
 export default function Contact() {
+  const router = useRouter();
   const labelRef = useRef([]);
   const [value, valueDispatch] = useReducer(valueReducer, VALUE_INITIAL_STATE);
   const [validate, validateDispatch] = useReducer(
@@ -36,8 +38,17 @@ export default function Contact() {
     });
   }, []);
 
-  const submitContact = async () => {
-    await http.postContact(value);
+  const submitContact = (e) => {
+    e.preventDefault();
+
+    http
+      .postContact(value)
+      .then((res) => {
+        alert("문의 주셔서 감사합니다. 빠른 시일 내에 답변 드리겠습니다.");
+      })
+      .catch((err) => {
+        alert("에러가 발생했습니다. 다시 시도해주세요.");
+      });
   };
 
   return (

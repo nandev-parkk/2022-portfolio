@@ -4,6 +4,8 @@ import commonStyles from "styles/common";
 import { css } from "@emotion/react";
 import { IsOpenContext, IsObserverContext } from "contexts/store";
 import { useEffect, useRef, useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "modules/redux/store";
 
 export default function Layout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,15 +25,17 @@ export default function Layout({ children }) {
   });
 
   return (
-    <IsObserverContext.Provider value={{ observerRef }}>
-      <IsOpenContext.Provider value={{ isOpen, setIsOpen }}>
-        <Header />
-        <main css={container({ isOpen })}>
-          <div css={inner}>{children}</div>
-          <Footer />
-        </main>
-      </IsOpenContext.Provider>
-    </IsObserverContext.Provider>
+    <Provider store={store}>
+      <IsObserverContext.Provider value={{ observerRef }}>
+        <IsOpenContext.Provider value={{ isOpen, setIsOpen }}>
+          <Header />
+          <main css={container({ isOpen })}>
+            <div css={inner}>{children}</div>
+            <Footer />
+          </main>
+        </IsOpenContext.Provider>
+      </IsObserverContext.Provider>
+    </Provider>
   );
 }
 
