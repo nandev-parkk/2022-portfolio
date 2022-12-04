@@ -1,7 +1,7 @@
 import HiddenTitle from "./HiddenTitle";
 import SectionTitle from "./SectionTitle";
 import commonStyles from "styles/common";
-import profile from "public/images/1.jpeg";
+import profile from "public/images/profile.jpeg";
 import Image from "next/image";
 import { css } from "@emotion/react";
 import { IsObserverContext } from "contexts/store";
@@ -77,6 +77,11 @@ const img = css`
   min-height: 50%;
   max-width: 400px;
   display: block;
+  filter: grayscale(100%);
+
+  &:hover {
+    filter: grayscale(0%);
+  }
 
   @media screen and (max-width: 767px) {
     margin: 0 auto 40px;
