@@ -10,7 +10,7 @@ import { checkName, checkEmail, checkText } from "utils/validator";
 import Link from "next/link";
 import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
 import { IsObserverContext } from "contexts/store";
-import HttpContext from "modules/Http";
+import HttpContext from "modules/http";
 import { useRouter } from "next/router";
 
 export default function Contact() {
@@ -43,10 +43,11 @@ export default function Contact() {
 
     http
       .postContact(value)
-      .then((res) => {
+      .then(() => {
         alert("문의 주셔서 감사합니다. 빠른 시일 내에 답변 드리겠습니다.");
+        router.reload();
       })
-      .catch((err) => {
+      .catch(() => {
         alert("에러가 발생했습니다. 다시 시도해주세요.");
       });
   };

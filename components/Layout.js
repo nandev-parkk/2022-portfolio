@@ -3,13 +3,17 @@ import Footer from "./Footer";
 import commonStyles from "styles/common";
 import { css } from "@emotion/react";
 import { IsOpenContext, IsObserverContext } from "contexts/store";
-import { useEffect, useRef, useState } from "react";
-import { Provider } from "react-redux";
-import { store } from "modules/redux/store";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { saveToken } from "modules/redux/tokenSlice";
+import HttpContext from "modules/http";
 
 export default function Layout({ children }) {
+  const dispatch = useDispatch();
+  const Http = useContext(HttpContext);
   const [isOpen, setIsOpen] = useState(false);
   const observerRef = useRef([]);
+  const { csrfToken } = useSelector((state) => state.tokenReducer);
 
   useEffect(() => {
     const body = window.document.body;
@@ -24,18 +28,34 @@ export default function Layout({ children }) {
     });
   });
 
+  console.log(csrfToken);
+
+  useEffect(() => {
+    if (csrfToken !== "") {
+      return;
+    }
+
+    Http.getCsrfToken()
+      .then((res) => {
+        dispatch(
+          saveToken({
+            csrfToken: res.csrfToken,
+          })
+        );
+      })
+      .catch(console.error);
+  }, []);
+
   return (
-    <Provider store={store}>
-      <IsObserverContext.Provider value={{ observerRef }}>
-        <IsOpenContext.Provider value={{ isOpen, setIsOpen }}>
-          <Header />
-          <main css={container({ isOpen })}>
-            <div css={inner}>{children}</div>
-            <Footer />
-          </main>
-        </IsOpenContext.Provider>
-      </IsObserverContext.Provider>
-    </Provider>
+    <IsObserverContext.Provider value={{ observerRef }}>
+      <IsOpenContext.Provider value={{ isOpen, setIsOpen }}>
+        <Header />
+        <main css={container({ isOpen })}>
+          <div css={inner}>{children}</div>
+          <Footer />
+        </main>
+      </IsOpenContext.Provider>
+    </IsObserverContext.Provider>
   );
 }
 
