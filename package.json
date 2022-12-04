@@ -1,15 +1,16 @@
 {
-  "name": "portfolio",
+  "name": "nandev-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 5001",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
+    "@netlify/plugin-nextjs": "^4.29.2",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.0",
     "eslint": "8.28.0",
