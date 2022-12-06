@@ -22,12 +22,7 @@ export default function Aside() {
 
   return (
     <aside css={aside({ isOpen })}>
-      <ul
-        css={list}
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      >
+      <ul css={list}>
         {listItems.map((item, i) => (
           <li key={item.id}>
             <button
@@ -36,6 +31,7 @@ export default function Aside() {
               className="link"
               onClick={() => {
                 scrollIntoView(observerRef, i);
+                setIsOpen(!isOpen);
               }}
             >
               {item.title}
