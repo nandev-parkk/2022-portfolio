@@ -29,6 +29,14 @@ const persistor = persistStore(store);
 const DEFAULT_SEO = {
   title: "Park SangHun | Portfolio",
   description: "프론트엔드 개발자 박상훈의 포트폴리오",
+  additionalMetaTags: [
+    {
+      name: "vieport",
+      content:
+        "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
+    },
+    { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
+  ],
   openGraph: {
     type: "website",
     locale: "ko_KR",
