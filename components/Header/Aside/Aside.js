@@ -147,6 +147,10 @@ const btn = ({ currentId, i }) => css`
 const nav = css`
   position: absolute;
   bottom: 100px;
+
+  @media screen and (max-width: 767px) {
+    bottom: 40px;
+  }
 `;
 
 const sns = css`
@@ -164,7 +168,7 @@ const sns = css`
     }
 
     svg {
-      stroke-width: 1.6;
+      stroke-width: 1.4;
       font-size: ${font.size.xl};
       transition: ${transition.short};
     }
