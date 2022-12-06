@@ -1,4 +1,5 @@
 import Head from "next/head";
+import profileImg from "public/images/profile.jpeg";
 
 export default function Seo({ title }) {
   return (
@@ -20,14 +21,14 @@ export default function Seo({ title }) {
         property="og:description"
         content="프론트엔드 개발자 박상훈의 포트폴리오"
       />
-      <meta property="og:image" content="" />
+      <meta property="og:image" content={profileImg} />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={title} />
       <meta
         name="twitter:description"
         content="프론트엔드 개발자 박상훈의 포트폴리오"
       />
-      <meta name="twitter:image" content="" />
+      <meta name="twitter:image" content={profileImg} />
     </Head>
   );
 }
