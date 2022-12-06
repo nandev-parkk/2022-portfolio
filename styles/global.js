@@ -76,6 +76,8 @@ const global = () => css`
     border: none;
     outline: none;
     font-family: "Rajdhani", sans-serif;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
   }
 
   textarea {
