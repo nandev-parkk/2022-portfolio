@@ -32,11 +32,11 @@ class Http {
     return res.data;
   }
 
-  // async getCsrfToken() {
-  //   const res = await axios.get("/auth/csrfToken");
+  async getCsrfToken() {
+    const res = await axios.get("/auth/csrfToken");
 
-  //   return res.data;
-  // }
+    return res.data;
+  }
 }
 
 const HttpContext = createContext(new Http());

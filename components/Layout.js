@@ -47,11 +47,11 @@ export default function Layout({ children }) {
   return (
     <IsObserverContext.Provider value={{ observerRef }}>
       <IsOpenContext.Provider value={{ isOpen, setIsOpen }}>
-        <Header />
+        {/* <Header />
         <main css={container({ isOpen })}>
           <div css={inner}>{children}</div>
           <Footer />
-        </main>
+        </main> */}
       </IsOpenContext.Provider>
     </IsObserverContext.Provider>
   );
