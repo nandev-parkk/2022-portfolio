@@ -61,7 +61,6 @@ const header = ({ direction, isOpen }) => css`
   left: 0;
   right: 0;
   z-index: 1;
-  background-color: ${color.black};
   transition: ${transition.short};
   transform: ${!isOpen && direction === "down"
     ? "translateY(-80px)"
