@@ -1,35 +1,37 @@
 import Head from "next/head";
-import profileImg from "public/images/profile.jpeg";
 
-export default function Seo({ title }) {
+import { NextSeo } from "next-seo";
+
+export default function Seo({ title, desc, image }) {
   return (
-    <Head>
-      <meta charSet="utf-8" />
-      <meta
-        name="description"
-        content="프론트엔드 개발자 박상훈의 포트폴리오"
-      />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1"
-      />
-      <title>{title}</title>
-      <meta property="og:url" content={domain} />
-      <meta property="og:title" content={title} />
-      <meta
-        property="og:description"
-        content="프론트엔드 개발자 박상훈의 포트폴리오"
-      />
-      <meta property="og:image" content={profileImg} />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:title" content={title} />
-      <meta
-        name="twitter:description"
-        content="프론트엔드 개발자 박상훈의 포트폴리오"
-      />
-      <meta name="twitter:image" content={profileImg} />
-    </Head>
+    <NextSeo
+      title={title}
+      description={desc}
+      additionalMetaTags={[
+        {
+          httpEquiv: "X-UA-Compatible",
+          content: "IE=edge",
+        },
+        {
+          name: "viewport",
+          content:
+            "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
+        },
+      ]}
+      openGraph={{
+        type: "website",
+        locale: "ko_KR",
+        url: domain,
+        title: title,
+        description: desc,
+        images: [
+          {
+            url: image.src,
+            alert: "프론트엔드 개발자 박상훈의 포트폴리오",
+          },
+        ],
+      }}
+    />
   );
 }
 
