@@ -10,15 +10,17 @@ import { DefaultSeo } from "next-seo";
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Layout>
-          <DefaultSeo {...DEFAULT_SEO} />
-          <Global styles={global} />
-          <Component {...pageProps} />
-        </Layout>
-      </PersistGate>
-    </Provider>
+    <>
+      <DefaultSeo {...DEFAULT_SEO} />
+      <Global styles={global} />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </PersistGate>
+      </Provider>
+    </>
   );
 }
 
