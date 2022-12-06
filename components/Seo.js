@@ -1,5 +1,4 @@
 import Head from "next/head";
-
 import { NextSeo } from "next-seo";
 
 export default function Seo({ title, desc, image }) {
