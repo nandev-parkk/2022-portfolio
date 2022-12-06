@@ -25,6 +25,7 @@ export default function MyApp({ Component, pageProps }) {
 }
 
 const persistor = persistStore(store);
+
 const DEFAULT_SEO = {
   title: "Park SangHun | Portfolio",
   description: "프론트엔드 개발자 박상훈의 포트폴리오",
