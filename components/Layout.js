@@ -65,7 +65,7 @@ const container = ({ isOpen }) => css`
   transition: ${transition.short};
 
   @media screen and (max-width: 1023px) {
-    padding: 0 40px;
+    padding: 0 20px;
   }
 `;
 
