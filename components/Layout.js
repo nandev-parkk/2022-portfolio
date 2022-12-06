@@ -28,21 +28,21 @@ export default function Layout({ children }) {
     });
   });
 
-  useEffect(() => {
-    if (csrfToken !== "") {
-      return;
-    }
+  // useEffect(() => {
+  //   if (csrfToken !== "") {
+  //     return;
+  //   }
 
-    Http.getCsrfToken()
-      .then((res) => {
-        dispatch(
-          saveToken({
-            csrfToken: res.csrfToken,
-          })
-        );
-      })
-      .catch(console.error);
-  }, []);
+  //   Http.getCsrfToken()
+  //     .then((res) => {
+  //       dispatch(
+  //         saveToken({
+  //           csrfToken: res.csrfToken,
+  //         })
+  //       );
+  //     })
+  //     .catch(console.error);
+  // }, []);
 
   return (
     <IsObserverContext.Provider value={{ observerRef }}>
