@@ -7,8 +7,7 @@ class Http {
     axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
     axios.interceptors.request.use(
       (config) => {
-        config.headers["nandev-portfolio-csrf-token"] =
-          store.getState().tokenReducer.csrfToken;
+        config.headers["csrf-token"] = store.getState().tokenReducer.csrfToken;
 
         return config;
       },
