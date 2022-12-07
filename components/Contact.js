@@ -381,7 +381,7 @@ const nameInputGroup = ({ name, isName }) => css`
   }
 
   &::after {
-    content: "숫자 및 특수문자를 제외한 2글자 이상 입력해주세요.";
+    content: "숫자 및 특수문자를 제외하고 2자 이상 20자 이하로 입력해주세요.";
     display: ${name !== "" && !isName ? "block" : "none"};
   }
 `;
@@ -411,7 +411,7 @@ const titleInputGroup = ({ title, isTitle }) => css`
   }
 
   &::after {
-    content: "3글자 이상 입력해주세요.";
+    content: "3자 이상 입력해주세요.";
     display: ${title !== "" && !isTitle ? "block" : "none"};
   }
 `;
@@ -426,7 +426,7 @@ const contentInputGroup = ({ content, isContent }) => css`
   }
 
   &::after {
-    content: "3글자 이상 입력해주세요.";
+    content: "3자 이상 입력해주세요.";
     display: ${content !== "" && !isContent ? "block" : "none"};
   }
 `;
