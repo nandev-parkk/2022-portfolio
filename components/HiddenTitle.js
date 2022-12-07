@@ -12,4 +12,6 @@ const heading = css`
   position: absolute;
   top: -9999px;
   left: -9999px;
+  opacity: 0;
+  visibility: hidden;
 `;
