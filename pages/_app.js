@@ -12,10 +12,10 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <DefaultSeo {...DEFAULT_SEO} />
-      <Global styles={global} />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Layout>
+            <Global styles={global} />
             <Component {...pageProps} />
           </Layout>
         </PersistGate>
