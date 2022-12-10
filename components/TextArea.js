@@ -1,7 +1,7 @@
 import commonStyles from "styles/common";
 import { css } from "@emotion/react";
 
-export default function TextArea({ id, name, value, onChange }) {
+export default function TextArea({ id, name, value, onChange, required }) {
   return (
     <textarea
       id={id}
@@ -9,6 +9,7 @@ export default function TextArea({ id, name, value, onChange }) {
       value={value || ""}
       onChange={onChange}
       css={textarea}
+      required={required}
     ></textarea>
   );
 }
