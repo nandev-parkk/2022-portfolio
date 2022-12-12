@@ -5,16 +5,11 @@ import { store } from "./redux/store";
 class Http {
   constructor() {
     axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-    axios.interceptors.request.use(
-      (config) => {
-        config.headers["csrf-token"] = store.getState().tokenReducer.csrfToken;
+    axios.interceptors.request.use((config) => {
+      config.headers["csrf-token"] = store.getState().tokenReducer.csrfToken;
 
-        return config;
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+      return config;
+    }, console.error);
   }
 
   async postContact(data) {

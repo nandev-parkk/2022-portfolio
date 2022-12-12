@@ -29,7 +29,7 @@ export default function Layout({ children }) {
   });
 
   useEffect(() => {
-    if (csrfToken !== "") {
+    if (csrfToken) {
       return;
     }
 
