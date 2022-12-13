@@ -53,7 +53,11 @@ export default function Aside() {
           >
             <FiGithub />
           </Link>
-          <Link href="/" target="_blank" rel="noopenner noreferrer">
+          <Link
+            href={process.env.NEXT_PUBLIC_LINKEDIN}
+            target="_blank"
+            rel="noopenner noreferrer"
+          >
             <FiLinkedin />
           </Link>
           <Link
