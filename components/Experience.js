@@ -1,11 +1,10 @@
-import { css } from "@emotion/react";
-import HiddenTitle from "./HiddenTitle";
 import SectionTitle from "./SectionTitle";
+import { ObserverContext } from "contexts/store";
 import { useContext } from "react";
-import { IsObserverContext } from "contexts/store";
+import { css } from "@emotion/react";
 
 export default function Experience() {
-  const { observerRef } = useContext(IsObserverContext);
+  const { observerRef } = useContext(ObserverContext);
 
   return (
     <section
@@ -13,7 +12,6 @@ export default function Experience() {
       ref={(el) => (observerRef.current[2] = el)}
       css={experience}
     >
-      <HiddenTitle title="experience" />
       <SectionTitle title="Experience" align="right" />
     </section>
   );

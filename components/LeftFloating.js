@@ -3,10 +3,10 @@ import { getIntersectionObserver } from "utils/observer";
 import { css } from "@emotion/react";
 import { useContext, useEffect, useState } from "react";
 import { scrollIntoView } from "utils/scrollIntoView";
-import { IsObserverContext } from "contexts/store";
+import { ObserverContext } from "contexts/store";
 
 export default function LeftFloating() {
-  const { observerRef } = useContext(IsObserverContext);
+  const { observerRef } = useContext(ObserverContext);
   const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {

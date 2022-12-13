@@ -1,5 +1,5 @@
 import commonStyles from "styles/common";
-import { IsOpenContext, IsObserverContext } from "contexts/store";
+import { IsOpenContext, ObserverContext } from "contexts/store";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
@@ -9,7 +9,7 @@ import { getIntersectionObserver } from "utils/observer";
 
 export default function Aside() {
   const { isOpen, setIsOpen } = useContext(IsOpenContext);
-  const { observerRef } = useContext(IsObserverContext);
+  const { observerRef } = useContext(ObserverContext);
   const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {

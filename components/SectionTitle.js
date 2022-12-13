@@ -4,9 +4,9 @@ import commonStyles from "styles/common";
 export default function SectionTitle({ title, align }) {
   return (
     <hgroup css={hgroup({ title, align })}>
-      <h3 css={heading({ align })} className="montserrat">
+      <h2 css={heading({ align })} className="montserrat">
         {title}
-      </h3>
+      </h2>
     </hgroup>
   );
 }

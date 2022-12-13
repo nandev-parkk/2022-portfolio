@@ -1,21 +1,17 @@
-import HiddenTitle from "./HiddenTitle";
 import SectionTitle from "./SectionTitle";
 import commonStyles from "styles/common";
 import Form from "./Form";
 import TextField from "./TextField";
-import { css } from "@emotion/react";
 import TextArea from "./TextArea";
-import { useEffect, useRef, useReducer, useContext } from "react";
+import { HttpContext, ObserverContext } from "contexts/store";
 import { checkName, checkEmail, checkText } from "utils/validator";
+import { useEffect, useRef, useReducer, useContext } from "react";
 import Link from "next/link";
-import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
-import { IsObserverContext } from "contexts/store";
-import HttpContext from "modules/http";
 import { useRouter } from "next/router";
+import { css } from "@emotion/react";
+import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
 
 export default function Contact() {
-  const router = useRouter();
-  const labelRef = useRef([]);
   const [value, valueDispatch] = useReducer(valueReducer, VALUE_INITIAL_STATE);
   const [validate, validateDispatch] = useReducer(
     validateReducer,
@@ -23,9 +19,13 @@ export default function Contact() {
   );
   const { name, email, title, content } = value;
   const { isName, isEmail, isTitle, isContent } = validate;
-  const { observerRef } = useContext(IsObserverContext);
+  const router = useRouter();
+  const { observerRef } = useContext(ObserverContext);
+
   const http = useContext(HttpContext);
 
+  // input label animation
+  const labelRef = useRef([]);
   useEffect(() => {
     labelRef.current.forEach((el) => {
       el.innerHTML = el.innerText
@@ -38,6 +38,7 @@ export default function Contact() {
     });
   }, []);
 
+  // submit contact
   const submitContact = (e) => {
     e.preventDefault();
 
@@ -47,7 +48,7 @@ export default function Contact() {
         alert("문의 주셔서 감사합니다. 빠른 시일 내에 답변 드리겠습니다.");
         router.reload();
       })
-      .catch(() => {
+      .catch((err) => {
         alert("에러가 발생했습니다. 다시 시도해주세요.");
         router.reload();
       });
@@ -59,7 +60,6 @@ export default function Contact() {
       ref={(el) => (observerRef.current[3] = el)}
       css={contact}
     >
-      <HiddenTitle title="contact" />
       <SectionTitle title="Contact" />
       <div css={contents}>
         <div css={items}>

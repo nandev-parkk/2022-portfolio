@@ -1,30 +1,50 @@
-import global from "styles/global";
 import Layout from "components/Layout";
+import global from "styles/global";
 import profileImg from "public/images/profile.jpeg";
-import { Global } from "@emotion/react";
-import { store } from "modules/redux/store";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistStore } from "redux-persist";
+import {
+  IsOpenContext,
+  ObserverContext,
+  CsrfTokenContext,
+  HttpContext,
+} from "contexts/store";
+import Http from "modules/http";
+import { useEffect, useState, useRef } from "react";
 import { DefaultSeo } from "next-seo";
+import { Global } from "@emotion/react";
 
 export default function MyApp({ Component, pageProps }) {
+  const [csrfToken, setCsrfToken] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const observerRef = useRef([]);
+  const http = new Http(csrfToken);
+
+  useEffect(() => {
+    http
+      .getCsrfToken()
+      .then((res) => {
+        setCsrfToken(res.csrfToken);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <>
       <DefaultSeo {...DEFAULT_SEO} />
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Layout>
-            <Global styles={global} />
-            <Component {...pageProps} />
-          </Layout>
-        </PersistGate>
-      </Provider>
+      <ObserverContext.Provider value={{ observerRef }}>
+        <IsOpenContext.Provider value={{ isOpen, setIsOpen }}>
+          <CsrfTokenContext.Provider value={csrfToken}>
+            <HttpContext.Provider value={http}>
+              <Layout>
+                <Global styles={global} />
+                <Component {...pageProps} />
+              </Layout>
+            </HttpContext.Provider>
+          </CsrfTokenContext.Provider>
+        </IsOpenContext.Provider>
+      </ObserverContext.Provider>
     </>
   );
 }
-
-const persistor = persistStore(store);
 
 const DEFAULT_SEO = {
   title: "Park SangHun | Portfolio",

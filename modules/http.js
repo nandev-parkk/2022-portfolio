@@ -1,12 +1,13 @@
 import axios from "axios";
-import { createContext } from "react";
-import { store } from "./redux/store";
 
-class Http {
-  constructor() {
+export default class Http {
+  constructor(csrfToken) {
+    this.csrfToken = csrfToken;
     axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
     axios.interceptors.request.use((config) => {
-      config.headers["csrf-token"] = store.getState().tokenReducer.csrfToken;
+      if (this.csrfToken) {
+        config.headers["csrf-token"] = this.csrfToken;
+      }
 
       return config;
     }, console.error);
@@ -32,6 +33,3 @@ class Http {
     return res.data;
   }
 }
-
-const HttpContext = createContext(new Http());
-export default HttpContext;

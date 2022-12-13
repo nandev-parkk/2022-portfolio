@@ -1,18 +1,16 @@
-import HiddenTitle from "./HiddenTitle";
 import SectionTitle from "./SectionTitle";
 import commonStyles from "styles/common";
 import profile from "public/images/profile.jpeg";
+import { ObserverContext } from "contexts/store";
+import { useContext } from "react";
 import Image from "next/image";
 import { css } from "@emotion/react";
-import { IsObserverContext } from "contexts/store";
-import { useContext } from "react";
 
 export default function About() {
-  const { observerRef } = useContext(IsObserverContext);
+  const { observerRef } = useContext(ObserverContext);
 
   return (
     <section id="about" ref={(el) => (observerRef.current[1] = el)} css={about}>
-      <HiddenTitle title="about" />
       <SectionTitle title="About" />
 
       <div css={content}>

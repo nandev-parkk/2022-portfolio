@@ -2,10 +2,10 @@ import { css } from "@emotion/react";
 import HiddenTitle from "./HiddenTitle";
 import commonStyles from "styles/common";
 import { useContext } from "react";
-import { IsObserverContext } from "contexts/store";
+import { ObserverContext } from "contexts/store";
 
 export default function Visual() {
-  const { observerRef } = useContext(IsObserverContext);
+  const { observerRef } = useContext(ObserverContext);
 
   return (
     <section id="home" ref={(el) => (observerRef.current[0] = el)} css={visual}>
