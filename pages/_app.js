@@ -56,6 +56,10 @@ const DEFAULT_SEO = {
         "width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1",
     },
     { "http-equiv": "X-UA-Compatible", content: "IE=edge" },
+    {
+      name: "google-site-verification",
+      content: "bZgMGbq8hY5Eg_UU3cNc3o_GUjFnUcTbJndCo3ZYzTE",
+    },
   ],
   openGraph: {
     type: "website",
