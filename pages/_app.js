@@ -63,7 +63,7 @@ const DEFAULT_SEO = {
     },
     {
       rel: "icon",
-      href: favicon,
+      href: favicon.src,
     },
   ],
   openGraph: {
