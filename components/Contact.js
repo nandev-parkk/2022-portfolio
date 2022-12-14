@@ -5,7 +5,7 @@ import TextField from "./TextField";
 import TextArea from "./TextArea";
 import { HttpContext, ObserverContext } from "contexts/store";
 import { checkName, checkEmail, checkText } from "utils/validator";
-import { useEffect, useRef, useReducer, useContext } from "react";
+import { useEffect, useRef, useReducer, useContext, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { css } from "@emotion/react";
@@ -13,12 +13,21 @@ import { FiInstagram, FiGithub, FiLinkedin } from "react-icons/fi";
 
 export default function Contact() {
   const [value, valueDispatch] = useReducer(valueReducer, VALUE_INITIAL_STATE);
+  const { name, email, title, content } = value;
+
   const [validate, validateDispatch] = useReducer(
     validateReducer,
     VALIDATE_INITIAL_STATE
   );
-  const { name, email, title, content } = value;
   const { isName, isEmail, isTitle, isContent } = validate;
+
+  const [errMsg, errMsgDispatch] = useReducer(
+    errMsgReducer,
+    ERRMSG_INITIAL_STATE
+  );
+
+  const { nameErrMsg, emailErrMsg, titleErrMsg, contentErrMsg } = errMsg;
+
   const router = useRouter();
   const { observerRef } = useContext(ObserverContext);
 
@@ -49,8 +58,18 @@ export default function Contact() {
         router.reload();
       })
       .catch((err) => {
-        alert("에러가 발생했습니다. 다시 시도해주세요.");
-        router.reload();
+        if (500 <= err.response.status) {
+          alert("에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
+          router.reload();
+        }
+
+        const filterArr = err.response.data.message.filter(
+          (item) => !item.msg.includes("Invalid value")
+        );
+
+        filterArr.forEach((item) => {
+          errMsgDispatch({ type: item.param, payload: item.msg });
+        });
       });
   };
 
@@ -93,7 +112,7 @@ export default function Contact() {
           </nav>
         </div>
         <Form legend="문의 하기" onSubmit={submitContact}>
-          <div css={[inputGroup, nameInputGroup({ name, isName })]}>
+          <div css={inputGroup}>
             <TextField
               type="text"
               id="name"
@@ -102,14 +121,13 @@ export default function Contact() {
               onChange={(e) => {
                 valueDispatch({
                   type: "name",
-                  name: e.target.value,
+                  payload: e.target.value,
                 });
                 validateDispatch({
                   type: "isName",
-                  isName: checkName(e.target.value),
+                  payload: checkName(e.target.value),
                 });
               }}
-              required
             />
             <label
               htmlFor="name"
@@ -118,8 +136,12 @@ export default function Contact() {
             >
               name
             </label>
+            <span css={errText}>
+              {((!!name && !isName) || (!isName && nameErrMsg)) &&
+                "숫자 및 특수문자를 제외하고 2자 이상 20자 이하로 입력해주세요."}
+            </span>
           </div>
-          <div css={[inputGroup, emailInputGroup({ email, isEmail })]}>
+          <div css={inputGroup}>
             <TextField
               type="email"
               id="email"
@@ -128,14 +150,13 @@ export default function Contact() {
               onChange={(e) => {
                 valueDispatch({
                   type: "email",
-                  email: e.target.value,
+                  payload: e.target.value,
                 });
                 validateDispatch({
                   type: "isEmail",
-                  isEmail: checkEmail(e.target.value),
+                  payload: checkEmail(e.target.value),
                 });
               }}
-              required
             />
             <label
               htmlFor="email"
@@ -144,8 +165,12 @@ export default function Contact() {
             >
               email
             </label>
+            <span css={errText}>
+              {((!!email && !isEmail) || (!isEmail && emailErrMsg)) &&
+                "이메일 형식을 올바르게 입력해주세요."}
+            </span>
           </div>
-          <div css={[inputGroup, titleInputGroup({ title, isTitle })]}>
+          <div css={inputGroup}>
             <TextField
               type="text"
               id="title"
@@ -154,14 +179,13 @@ export default function Contact() {
               onChange={(e) => {
                 valueDispatch({
                   type: "title",
-                  title: e.target.value,
+                  payload: e.target.value,
                 });
                 validateDispatch({
                   type: "isTitle",
-                  isTitle: checkText(e.target.value),
+                  payload: checkText(e.target.value),
                 });
               }}
-              required
             />
             <label
               htmlFor="title"
@@ -170,8 +194,12 @@ export default function Contact() {
             >
               title
             </label>
+            <span css={errText}>
+              {((!!title && !isTitle) || (!isTitle && titleErrMsg)) &&
+                "3자 이상 입력해주세요."}
+            </span>
           </div>
-          <div css={[inputGroup, contentInputGroup({ content, isContent })]}>
+          <div css={inputGroup}>
             <TextArea
               id="content"
               name="content"
@@ -179,14 +207,13 @@ export default function Contact() {
               onChange={(e) => {
                 valueDispatch({
                   type: "content",
-                  content: e.target.value,
+                  payload: e.target.value,
                 });
                 validateDispatch({
                   type: "isContent",
-                  isContent: checkText(e.target.value),
+                  payload: checkText(e.target.value),
                 });
               }}
-              required
             />
             <label
               htmlFor="content"
@@ -195,27 +222,39 @@ export default function Contact() {
             >
               content
             </label>
+            <span css={errText}>
+              {((!!content && !isContent) || (!isContent && contentErrMsg)) &&
+                "3자 이상 입력해주세요."}
+            </span>
           </div>
-          <button
-            css={submit}
-            disabled={
-              name === "" ||
-              email === "" ||
-              title === "" ||
-              content === "" ||
-              !isName ||
-              !isEmail ||
-              !isTitle ||
-              !isContent
-            }
-          >
-            문의하기
-          </button>
+          <button css={submit}>문의하기</button>
         </Form>
       </div>
     </section>
   );
 }
+
+const ERRMSG_INITIAL_STATE = {
+  nameErrMsg: "",
+  emailErrMsg: "",
+  titleErrMsg: "",
+  contentErrMsg: "",
+};
+
+const errMsgReducer = (state, action) => {
+  switch (action.type) {
+    case "name":
+      return { ...state, nameErrMsg: action.payload };
+    case "email":
+      return { ...state, emailErrMsg: action.payload };
+    case "title":
+      return { ...state, titleErrMsg: action.payload };
+    case "content":
+      return { ...state, contentErrMsg: action.payload };
+    default:
+      return state;
+  }
+};
 
 const VALUE_INITIAL_STATE = {
   name: "",
@@ -227,13 +266,13 @@ const VALUE_INITIAL_STATE = {
 const valueReducer = (state, action) => {
   switch (action.type) {
     case "name":
-      return { ...state, name: action.name };
+      return { ...state, name: action.payload };
     case "email":
-      return { ...state, email: action.email };
+      return { ...state, email: action.payload };
     case "title":
-      return { ...state, title: action.title };
+      return { ...state, title: action.payload };
     case "content":
-      return { ...state, content: action.content };
+      return { ...state, content: action.payload };
     default:
       return state;
   }
@@ -249,13 +288,13 @@ const VALIDATE_INITIAL_STATE = {
 const validateReducer = (state, action) => {
   switch (action.type) {
     case "isName":
-      return { ...state, isName: action.isName };
+      return { ...state, isName: action.payload };
     case "isEmail":
-      return { ...state, isEmail: action.isEmail };
+      return { ...state, isEmail: action.payload };
     case "isTitle":
-      return { ...state, isTitle: action.isTitle };
+      return { ...state, isTitle: action.payload };
     case "isContent":
-      return { ...state, isContent: action.isContent };
+      return { ...state, isContent: action.payload };
     default:
       return state;
   }
@@ -355,7 +394,7 @@ const inputGroup = css`
 
   & textarea {
     & + label {
-      top: 8px;
+      transform: translateY(8px);
     }
 
     &:focus {
@@ -372,66 +411,6 @@ const inputGroup = css`
     & textarea {
       font-size: ${font.size.sm};
     }
-  }
-`;
-
-const nameInputGroup = ({ name, isName }) => css`
-  & input {
-    border-color: ${isName
-      ? color.white
-      : name !== "" && !isName
-      ? color.red
-      : null};
-  }
-
-  &::after {
-    content: "숫자 및 특수문자를 제외하고 2자 이상 20자 이하로 입력해주세요.";
-    display: ${name !== "" && !isName ? "block" : "none"};
-  }
-`;
-
-const emailInputGroup = ({ email, isEmail }) => css`
-  & input {
-    border-color: ${isEmail
-      ? color.white
-      : email !== "" && !isEmail
-      ? color.red
-      : null};
-  }
-
-  &::after {
-    content: "이메일 형식을 올바르게 입력해주세요.";
-    display: ${email !== "" && !isEmail ? "block" : "none"};
-  }
-`;
-
-const titleInputGroup = ({ title, isTitle }) => css`
-  & input {
-    border-color: ${isTitle
-      ? color.white
-      : title !== "" && !isTitle
-      ? color.red
-      : null};
-  }
-
-  &::after {
-    content: "3자 이상 입력해주세요.";
-    display: ${title !== "" && !isTitle ? "block" : "none"};
-  }
-`;
-
-const contentInputGroup = ({ content, isContent }) => css`
-  & textarea {
-    border-color: ${isContent
-      ? color.white
-      : content !== "" && !isContent
-      ? color.red
-      : null};
-  }
-
-  &::after {
-    content: "3자 이상 입력해주세요.";
-    display: ${content !== "" && !isContent ? "block" : "none"};
   }
 `;
 
@@ -452,60 +431,36 @@ const label = css`
   }
 `;
 
-const nameLabel = ({ name, isName }) => css`
+const nameLabel = ({ name }) => css`
   & span {
-    color: ${isName ? color.white : name !== "" && !isName ? color.red : null};
-    transform: ${isName
-      ? "translateY(-20px)"
-      : name !== "" && !isName
-      ? "translateY(-20px)"
-      : null};
+    transform: ${!!name && "translateY(-20px)"};
   }
 `;
 
-const emailLabel = ({ email, isEmail }) => css`
+const emailLabel = ({ email }) => css`
   & span {
-    color: ${isEmail
-      ? color.white
-      : email !== "" && !isEmail
-      ? color.red
-      : null};
-    transform: ${isEmail
-      ? "translateY(-20px)"
-      : email !== "" && !isEmail
-      ? "translateY(-20px)"
-      : null};
+    transform: ${!!email && "translateY(-20px)"};
   }
 `;
 
-const titleLabel = ({ title, isTitle }) => css`
+const titleLabel = ({ title }) => css`
   & span {
-    color: ${isTitle
-      ? color.white
-      : title !== "" && !isTitle
-      ? color.red
-      : null};
-    transform: ${isTitle
-      ? "translateY(-20px)"
-      : title !== "" && !isTitle
-      ? "translateY(-20px)"
-      : null};
+    transform: ${!!title && "translateY(-20px)"};
   }
 `;
 
-const contentLabel = ({ content, isContent }) => css`
+const contentLabel = ({ content }) => css`
   & span {
-    color: ${isContent
-      ? color.white
-      : content !== "" && !isContent
-      ? color.red
-      : null};
-    transform: ${isContent
-      ? "translateY(-34px)"
-      : content !== "" && !isContent
-      ? "translateY(-34px)"
-      : null};
+    transform: ${!!content && "translateY(-34px)"};
   }
+`;
+
+const errText = css`
+  position: absolute;
+  bottom: -22px;
+  left: 8px;
+  color: ${color.red};
+  font-size: ${font.size.xxs};
 `;
 
 const submit = css`

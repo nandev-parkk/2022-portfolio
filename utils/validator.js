@@ -1,5 +1,5 @@
 export const checkName = (text) => {
-  return /^[가-힣a-zA-Z\s]{2,20}$/.test(text);
+  return /^[가-힣a-zA-Z]{2,20}$/.test(text);
 };
 
 export const checkEmail = (text) => {
