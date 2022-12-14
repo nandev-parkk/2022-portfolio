@@ -30,12 +30,12 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Global styles={global} />
       <DefaultSeo {...DEFAULT_SEO} />
       <ObserverContext.Provider value={{ observerRef }}>
         <IsOpenContext.Provider value={{ isOpen, setIsOpen }}>
           <CsrfTokenContext.Provider value={csrfToken}>
             <HttpContext.Provider value={http}>
+              <Global styles={global} />
               <Layout>
                 <Component {...pageProps} />
               </Layout>

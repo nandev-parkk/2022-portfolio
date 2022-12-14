@@ -1,13 +1,9 @@
 import { css } from "@emotion/react";
 import commonStyles from "./common";
 
-const { color, transition } = commonStyles;
+const { color, transition, font } = commonStyles;
 
 const global = css`
-  @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
-  @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
-
   * {
     box-sizing: border-box;
     margin: 0;
@@ -114,6 +110,188 @@ const global = css`
 
   .montserrat {
     font-family: "Montserrat", sans-serif;
+  }
+
+  @font-face {
+    font-family: "Rajdhani";
+    src: url("../fonts/Rajdhani/Rajdhani-Light.eot");
+    src: url("../fonts/Rajdhani/Rajdhani-Light.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Rajdhani/Rajdhani-Light.woff2") format("woff2"),
+      url("../fonts/Rajdhani/Rajdhani-Light.woff") format("woff"),
+      url("../fonts/Rajdhani/Rajdhani-Light.ttf") format("truetype");
+    font-weight: ${font.weight.light};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Rajdhani";
+    src: url("../fonts/Rajdhani/Rajdhani-Regular.eot");
+    src: url("../fonts/Rajdhani/Rajdhani-Regular.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Rajdhani/Rajdhani-Regular.woff2") format("woff2"),
+      url("../fonts/Rajdhani/Rajdhani-Regular.woff") format("woff"),
+      url("../fonts/Rajdhani/Rajdhani-Regular.ttf") format("truetype");
+    font-weight: ${font.weight.regular};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Rajdhani";
+    src: url("../fonts/Rajdhani/Rajdhani-Medium.eot");
+    src: url("../fonts/Rajdhani/Rajdhani-Medium.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Rajdhani/Rajdhani-Medium.woff2") format("woff2"),
+      url("../fonts/Rajdhani/Rajdhani-Medium.woff") format("woff"),
+      url("../fonts/Rajdhani/Rajdhani-Medium.ttf") format("truetype");
+    font-weight: ${font.weight.medium};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Rajdhani";
+    src: url("../fonts/Rajdhani/Rajdhani-SemiBold.eot");
+    src: url("../fonts/Rajdhani/Rajdhani-SemiBold.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Rajdhani/Rajdhani-SemiBold.woff2") format("woff2"),
+      url("../fonts/Rajdhani/Rajdhani-SemiBold.woff") format("woff"),
+      url("../fonts/Rajdhani/Rajdhani-SemiBold.ttf") format("truetype");
+    font-weight: ${font.weight.semiBold};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Rajdhani";
+    src: url("../fonts/Rajdhani/Rajdhani-Bold.eot");
+    src: url("../fonts/Rajdhani/Rajdhani-Bold.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Rajdhani/Rajdhani-Bold.woff2") format("woff2"),
+      url("../fonts/Rajdhani/Rajdhani-Bold.woff") format("woff"),
+      url("../fonts/Rajdhani/Rajdhani-Bold.ttf") format("truetype");
+    font-weight: ${font.weight.bold};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-Thin.eot");
+    src: url("../fonts/Montserrat/Montserrat-Thin.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-Thin.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-Thin.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-Thin.ttf") format("truetype");
+    font-weight: ${font.weight.thin};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-ExtraLight.eot");
+    src: url("../fonts/Montserrat/Montserrat-ExtraLight.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-ExtraLight.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-ExtraLight.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-ExtraLight.ttf") format("truetype");
+    font-weight: ${font.weight.extraLight};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-Light.eot");
+    src: url("../fonts/Montserrat/Montserrat-Light.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-Light.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-Light.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-Light.ttf") format("truetype");
+    font-weight: ${font.weight.light};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-Regular.eot");
+    src: url("../fonts/Montserrat/Montserrat-Regular.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-Regular.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-Regular.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+    font-weight: ${font.weight.regular};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-Medium.eot");
+    src: url("../fonts/Montserrat/Montserrat-Medium.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-Medium.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-Medium.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-Medium.ttf") format("truetype");
+    font-weight: ${font.weight.medium};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-SemiBold.eot");
+    src: url("../fonts/Montserrat/Montserrat-SemiBold.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-SemiBold.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-SemiBold.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-SemiBold.ttf") format("truetype");
+    font-weight: ${font.weight.semiBold};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-Bold.eot");
+    src: url("../fonts/Montserrat/Montserrat-Bold.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-Bold.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-Bold.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-Bold.ttf") format("truetype");
+    font-weight: ${font.weight.bold};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-ExtraBold.eot");
+    src: url("../fonts/Montserrat/Montserrat-ExtraBold.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-ExtraBold.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-ExtraBold.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-ExtraBold.ttf") format("truetype");
+    font-weight: ${font.weight.extraBold};
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat/Montserrat-Black.eot");
+    src: url("../fonts/Montserrat/Montserrat-Black.eot?#iefix")
+        format("embedded-opentype"),
+      url("../fonts/Montserrat/Montserrat-Black.woff2") format("woff2"),
+      url("../fonts/Montserrat/Montserrat-Black.woff") format("woff"),
+      url("../fonts/Montserrat/Montserrat-Black.ttf") format("truetype");
+    font-weight: ${font.weight.black};
+    font-style: normal;
+    font-display: swap;
   }
 `;
 
