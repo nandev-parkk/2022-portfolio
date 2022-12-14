@@ -1,6 +1,7 @@
 import Layout from "components/Layout";
 import global from "styles/global";
 import profileImg from "public/images/profile.jpeg";
+import favicon from "public/favicon.ico";
 import {
   IsOpenContext,
   ObserverContext,
@@ -59,6 +60,10 @@ const DEFAULT_SEO = {
     {
       name: "google-site-verification",
       content: "bZgMGbq8hY5Eg_UU3cNc3o_GUjFnUcTbJndCo3ZYzTE",
+    },
+    {
+      rel: "icon",
+      href: favicon,
     },
   ],
   openGraph: {
