@@ -1,6 +1,5 @@
-<div align="center">
-  # nandev portfolio
-</div>
+# nandev portfolio
+
 <br />
 
 <img src="./public/images/readme/home.png" />
