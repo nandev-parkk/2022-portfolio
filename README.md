@@ -1,5 +1,6 @@
-# <center>nandev portfolio</center>
-
+<div align="center">
+  # nandev portfolio
+</div>
 <br />
 
 <img src="./public/images/readme/home.png" />
@@ -10,7 +11,7 @@
 
 <br />
 
-#### 🛠 사용 기술
+#### 🔨 사용 기술
 
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>
 <img src="https://img.shields.io/badge/Emotion-DB7093?style=flat-square&logo=styled-components&logoColor=white"/>
