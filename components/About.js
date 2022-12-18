@@ -12,7 +12,6 @@ export default function About() {
   return (
     <section id="about" ref={(el) => (observerRef.current[1] = el)} css={about}>
       <SectionTitle title="About" />
-
       <div css={content}>
         <span css={img}>
           <Image layout="responsive" src={profile} alt="profile" />
