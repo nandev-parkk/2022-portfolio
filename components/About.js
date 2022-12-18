@@ -33,11 +33,11 @@ export default function About() {
             좋은 코드란 사람이 이해하기 쉬운 코드라고 생각하며, 항상 재사용성과
             확장성을 염두에 둔 간결한 코드를 작성하고자 노력합니다.
           </p>
-          <div css={skills}>
-            <span css={skillsTitle} className="montserrat">
-              Skills
+          <div css={skill}>
+            <span css={skillTitle} className="montserrat">
+              Skill
             </span>
-            <ul css={skillsList}>
+            <ul css={skillList}>
               <li>
                 <p>HTML</p>
                 <p>CSS & SCSS</p>
@@ -60,6 +60,10 @@ const { color, font } = commonStyles;
 
 const about = css`
   margin: 0 0 140px;
+
+  @media screen and (max-width: 767px) {
+    margin: 0 0 80px;
+  }
 `;
 
 const content = css`
@@ -98,9 +102,9 @@ const desc = css`
   }
 `;
 
-const skills = css``;
+const skill = css``;
 
-const skillsTitle = css`
+const skillTitle = css`
   font-size: ${font.size.xl};
   display: inline-block;
   margin-bottom: 20px;
@@ -110,7 +114,7 @@ const skillsTitle = css`
   }
 `;
 
-const skillsList = css`
+const skillList = css`
   display: flex;
 
   li {

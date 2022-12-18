@@ -76,10 +76,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      ref={(el) => (observerRef.current[3] = el)}
+      ref={(el) => (observerRef.current[4] = el)}
       css={contact}
     >
-      <SectionTitle title="Contact" />
+      <SectionTitle title="Contact" align="right" />
       <div css={contents}>
         <div css={items}>
           <p css={desc}>
@@ -304,6 +304,10 @@ const { color, font, transition } = commonStyles;
 
 const contact = css`
   margin: 140px 0;
+
+  @media screen and (max-width: 767px) {
+    margin: 80px 0;
+  }
 `;
 
 const contents = css`
@@ -471,6 +475,12 @@ const submit = css`
   width: 100%;
   font-size: ${font.size.md};
   transition: ${transition.short};
+
+  &:hover {
+    background-color: ${color.white};
+    transition: ${transition.short};
+    color: ${color.black};
+  }
 
   &:disabled {
     color: ${color.gray};

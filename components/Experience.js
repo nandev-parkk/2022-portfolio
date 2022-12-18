@@ -1,11 +1,9 @@
 import SectionTitle from "./SectionTitle";
 import { ObserverContext } from "contexts/store";
+import commonStyles from "styles/common";
 import { useContext } from "react";
 import { css } from "@emotion/react";
-import commonStyles from "styles/common";
 import Link from "next/link";
-import Image from "next/image";
-import img01 from "/public/images/experience/experience_1.png";
 
 export default function Experience() {
   const { observerRef } = useContext(ObserverContext);
@@ -94,19 +92,19 @@ export default function Experience() {
   );
 }
 
-const { color, font } = commonStyles;
+const { color, font, transition } = commonStyles;
 
 const experience = css`
   margin: 140px 0;
+
+  @media screen and (max-width: 767px) {
+    margin: 80px 0;
+  }
 `;
 
 const content = css``;
 
 const item = css`
-  &:nth-of-type(2n) {
-    text-align: right;
-  }
-
   &:not(:last-child) {
     padding-bottom: 24px;
     margin-bottom: 24px;
@@ -140,6 +138,12 @@ const link = css`
 
   &:not(:last-child) {
     margin-right: 14px;
+  }
+
+  &:hover {
+    background-color: ${color.white};
+    transition: ${transition.short};
+    color: ${color.black};
   }
 `;
 

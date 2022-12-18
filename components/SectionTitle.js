@@ -15,6 +15,11 @@ const { color, font } = commonStyles;
 
 const hgroup = ({ align }) => css`
   text-align: ${align === "right" && "right"};
+  margin-bottom: 60px;
+
+  @media screen and (max-width: 1023px) {
+    margin-bottom: 40px;
+  }
 `;
 
 const heading = ({ align }) => css`
@@ -23,7 +28,6 @@ const heading = ({ align }) => css`
   font-weight: ${font.weight.regular};
   position: relative;
   display: inline-block;
-  margin-bottom: 60px;
 
   &::before {
     content: "";
@@ -46,8 +50,6 @@ const heading = ({ align }) => css`
   }
 
   @media screen and (max-width: 1023px) {
-    margin-bottom: 20px;
-
     &::before {
       width: 80px;
       right: ${align === "right" ? "auto" : "-100px"};

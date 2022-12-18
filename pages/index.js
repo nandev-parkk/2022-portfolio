@@ -4,6 +4,7 @@ import About from "components/About";
 import Experience from "components/Experience";
 import Contact from "components/Contact";
 import LeftFloating from "components/LeftFloating";
+import Project from "components/Project";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Visual />
       <About />
       <Experience />
+      <Project />
       <Contact />
       <LeftFloating />
     </>

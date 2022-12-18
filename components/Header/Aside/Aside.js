@@ -90,7 +90,8 @@ const listItems = [
   { id: "0", title: "Home" },
   { id: "1", title: "About" },
   { id: "2", title: "Experience" },
-  { id: "3", title: "Contact" },
+  { id: "3", title: "Project" },
+  { id: "4", title: "Contact" },
 ];
 
 const { color, font, transition } = commonStyles;
