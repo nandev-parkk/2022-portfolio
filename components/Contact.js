@@ -3,6 +3,7 @@ import commonStyles from "styles/common";
 import Form from "./Form";
 import TextField from "./TextField";
 import TextArea from "./TextArea";
+import Button from "./Button";
 import { HttpContext, ObserverContext } from "contexts/store";
 import { checkName, checkEmail, checkText } from "utils/validator";
 import { useEffect, useRef, useReducer, useContext, useState } from "react";
@@ -116,6 +117,7 @@ export default function Contact() {
             <TextField
               type="text"
               id="name"
+              style={input}
               name="name"
               value={value.name}
               onChange={(e) => {
@@ -145,6 +147,7 @@ export default function Contact() {
             <TextField
               type="email"
               id="email"
+              style={input}
               name="email"
               value={value.email}
               onChange={(e) => {
@@ -174,6 +177,7 @@ export default function Contact() {
             <TextField
               type="text"
               id="title"
+              style={input}
               name="title"
               value={value.title}
               onChange={(e) => {
@@ -204,6 +208,7 @@ export default function Contact() {
               id="content"
               name="content"
               value={value.content}
+              style={textarea}
               onChange={(e) => {
                 valueDispatch({
                   type: "content",
@@ -227,7 +232,7 @@ export default function Contact() {
                 "3자 이상 입력해주세요."}
             </span>
           </div>
-          <button css={submit}>문의하기</button>
+          <Button style={submit}>문의하기</Button>
         </Form>
       </div>
     </section>
@@ -300,7 +305,7 @@ const validateReducer = (state, action) => {
   }
 };
 
-const { color, font, transition } = commonStyles;
+const { color, font, transition, borderRadius } = commonStyles;
 
 const contact = css`
   margin: 140px 0;
@@ -418,6 +423,15 @@ const inputGroup = css`
   }
 `;
 
+const input = css`
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid ${color.white};
+  caret-color: ${color.white};
+  color: ${color.white};
+  transition: ${transition.short};
+`;
+
 const label = css`
   position: absolute;
   top: 0;
@@ -467,9 +481,20 @@ const errText = css`
   font-size: ${font.size.xxs};
 `;
 
+const textarea = css`
+  border: 1px solid ${color.white};
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  height: 200px;
+  transition: ${transition.short};
+  caret-color: ${color.white};
+  color: ${color.white};
+`;
+
 const submit = css`
   color: ${color.white};
-  border-radius: 4px;
+  border-radius: ${borderRadius.short};
   border: 1px solid ${color.white};
   padding: 14px 20px;
   width: 100%;

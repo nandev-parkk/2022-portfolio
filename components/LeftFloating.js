@@ -1,4 +1,5 @@
 import commonStyles from "styles/common";
+import Button from "./Button";
 import { getIntersectionObserver } from "utils/observer";
 import { css } from "@emotion/react";
 import { useContext, useEffect, useState } from "react";
@@ -76,7 +77,7 @@ const btn = ({ currentId, i }) => css`
     content: "";
     width: ${currentId === i && "100%"};
     height: 2px;
-    background: ${color.yellow};
+    background-color: ${color.yellow};
     position: absolute;
     bottom: -2px;
     left: ${currentId === i && "0"};

@@ -1,7 +1,7 @@
 import HiddenTitle from "components/HiddenTitle";
 import Visual from "components/Visual";
 import About from "components/About";
-import Experience from "components/Experience";
+import Experience from "components/Experience/Experience";
 import Contact from "components/Contact";
 import LeftFloating from "components/LeftFloating";
 

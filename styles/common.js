@@ -9,6 +9,9 @@ const commonStyles = {
   transition: {
     short: ".3s",
   },
+  borderRadius: {
+    short: "4px",
+  },
   font: {
     size: {
       xxs: "12px",

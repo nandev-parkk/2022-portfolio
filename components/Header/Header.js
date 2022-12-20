@@ -13,7 +13,7 @@ export default function Header() {
   const { isOpen, setIsOpen } = useContext(IsOpenContext);
 
   useEffect(() => {
-    window.addEventListener("mousewheel", (e) => {
+    window.addEventListener("wheel", (e) => {
       e.deltaY > 0 ? setDirection("down") : setDirection("up");
     });
   });

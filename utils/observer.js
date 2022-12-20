@@ -9,8 +9,8 @@ export const getIntersectionObserver = (setState) => {
 
   const options = {
     root: null,
-    rootMargin: "0px",
-    threshold: 1,
+    rootMargin: "70px",
+    threshold: 0.9,
   };
 
   const observer = new IntersectionObserver(callback, options);
