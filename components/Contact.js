@@ -76,10 +76,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      ref={(el) => (observerRef.current[4] = el)}
+      ref={(el) => (observerRef.current[3] = el)}
       css={contact}
     >
-      <SectionTitle title="Contact" align="right" />
+      <SectionTitle title="Contact" />
       <div css={contents}>
         <div css={items}>
           <p css={desc}>

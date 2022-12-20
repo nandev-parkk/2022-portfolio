@@ -18,4 +18,4 @@ export const getIntersectionObserver = (setState) => {
   return observer;
 };
 
-const sectionItems = ["#home", "#about", "#experience", "#project", "#contact"];
+const sectionItems = ["#home", "#about", "#experience", "#contact"];
